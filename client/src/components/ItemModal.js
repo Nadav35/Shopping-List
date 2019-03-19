@@ -12,11 +12,17 @@ import {
 
 import { connect } from 'react-redux';
 import { addItem } from '../actions/itemActions';
+import PropTypes from 'prop-types';
 
 export class ItemModal extends Component {
   state = {
     modal: false,
     name: ''
+  }
+
+  static propTypes = {
+    isAuthenticated: PropTypes.bool,
+    item: PropTypes.object.isRequired
   }
 
   toggle = () => {
@@ -48,11 +54,12 @@ export class ItemModal extends Component {
   render() {
     return (
       <div>
-        <Button
+        {this.props.isAuthenticated ? <Button
           color="dark"
-          style={{ marginBottom: '2rem'}}
+          style={{ marginBottom: '2rem' }}
           onClick={this.toggle}
-        >Add Item</Button>
+        >Add Item</Button> : <h4>Please log in to manage items</h4>}
+
 
         <Modal
           isOpen={this.state.modal}
@@ -63,7 +70,7 @@ export class ItemModal extends Component {
             <Form onSubmit={this.onSubmit}>
               <FormGroup>
                 <Label for="item">Item</Label>
-                <Input 
+                <Input
                   type="text"
                   name="name"
                   id="item"
@@ -72,10 +79,10 @@ export class ItemModal extends Component {
                 />
                 <Button
                   color='dark'
-                  style={{ marginTop: '2rem'}}
+                  style={{ marginTop: '2rem' }}
                   block
                 >
-                Add Item</Button>
+                  Add Item</Button>
 
               </FormGroup>
 
@@ -91,7 +98,8 @@ export class ItemModal extends Component {
 }
 
 const mapStateToProps = state => ({
-  item: state.item
+  item: state.item,
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps, { addItem })(ItemModal)

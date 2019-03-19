@@ -1,0 +1,5 @@
+{
+  "mongoURI": "mongodb+srv://nadav-noy:nadav12345@cluster0-oypyt.mongodb.net/test?retryWrites=true",
+  "jwtSecret": "sl_shoppingList"
+
+}

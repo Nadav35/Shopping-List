@@ -5,7 +5,7 @@ const initialState = {
   loading: false
 }
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case GET_ITEMS:
       return {
@@ -19,16 +19,16 @@ export default function(state = initialState, action) {
         items: [action.payload, ...state.items]
       }
     case DELETE_ITEM:
-        return {
-          ...state,
-          items: state.items.filter(item => item._id !== action.payload)
-        }
+      return {
+        ...state,
+        items: state.items.filter(item => item._id !== action.payload)
+      }
     case ITEMS_LOADING:
-        return {
-          ...state,
-          loading: true
-        }
-  
+      return {
+        ...state,
+        loading: true
+      }
+
     default:
       return state;
   }
